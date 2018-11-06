@@ -23,7 +23,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource,UITableViewD
         // Do any additional setup after loading the view.
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
-        //fetch()
+        fetch()
     }
     @objc func refreshControlAction(_ refreshControl: UIRefreshControl){
         fetch()
