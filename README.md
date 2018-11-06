@@ -27,7 +27,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 1.
 2.
 
-## Video Walkthrough
+## Video Walkthrough (GIF link available, but not shown in this README)
 
 Here's a walkthrough of implemented user stories:
 
