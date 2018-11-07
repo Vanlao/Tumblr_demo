@@ -13,7 +13,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource,UITableViewD
     var posts: [[String: Any]] = []
     @IBOutlet weak var tableView: UITableView!
     let refreshControl = UIRefreshControl()
-    
+    //let CellIdentifier = "TableViewCell", HeaderViewIdentifier = "TableViewHeaderView"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -27,7 +28,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource,UITableViewD
     }
     @objc func refreshControlAction(_ refreshControl: UIRefreshControl){
         fetch()
-    }
+    } 
     
     func fetch(){
         // Network request snippet
@@ -54,6 +55,10 @@ class PhotosViewController: UIViewController, UITableViewDataSource,UITableViewD
         task.resume()
     }
     
+    /*func numberOfSections(in tableView: UITableView) -> Int{
+        return posts.count
+    }*/
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
@@ -76,14 +81,34 @@ class PhotosViewController: UIViewController, UITableViewDataSource,UITableViewD
         }
         return cell
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
+        let vc = segue.destination as! PhotoDetailsViewController
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        
+        let post = posts[indexPath.row]
+        if let photos = post["photos"] as? [[String: Any]] {
+            // 1.
+            let photo = photos[0]
+            // 2.
+            let originalSize = photo["original_size"] as! [String: Any]
+            // 3.
+            let urlString = originalSize["url"] as! String
+            // 4.
+            let url = URL(string: urlString)
+            
+            vc.imageURL = url
+        }
+        
         // Pass the selected object to the new view controller.
+    
     }
-    */
+    
+    
 
 }
